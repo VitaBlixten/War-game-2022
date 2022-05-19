@@ -32,8 +32,18 @@ for row in range(app.row):
         x = row*60 + 22
         y =col*60 +22 
         Rect(x,y,400/7,400/7,fill="green", border="black")
-        hej = Rect(x,y,400/7,400/7,fill="yellow", opacity=50)
-        app.grid[row][col] = hej
+        if col == 0:
+            redsold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="DarkBlue", border='black', borderWidth=1))
+            app.grid[row][0] = redsold
+        elif col == 5:
+            bluesold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="Red", border='black', borderWidth=1))
+            app.grid[row][5] = bluesold
+        
+        
+        else:
+            hej = Rect(x,y,400/7,400/7,fill="yellow", opacity=50)
+            app.grid[row][col] = hej
+            
         
 
 
@@ -41,13 +51,14 @@ for row in range(app.row):
 
 
 ###soldiers
+'''
 for row in range(app.row):
     x = row*60 + 25.2 
     redsold = Rect(x, 45, 50, 15, fill="DarkBlue", border='black', borderWidth=1)
-    bluesold = Rect(x, 345, 50, 15, fill="Red", border='black', borderWidth=1)
+    bluesold = Grupp(Rect(x, 345, 50, 15, fill="Red", border='black', borderWidth=1))
     app.grid[row][0] = redsold
     app.grid[row][5] = bluesold
-
+'''
 
 ###firing
 def shooting(sold1, sold2):
