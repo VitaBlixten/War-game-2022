@@ -39,7 +39,6 @@ for row in range(app.row):
             bluesold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="Red", border='black', borderWidth=1))
             app.grid[row][5] = bluesold
         
-        
         else:
             hej = Rect(x,y,400/7,400/7,fill="yellow", opacity=50)
             app.grid[row][col] = hej
