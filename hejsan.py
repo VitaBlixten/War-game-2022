@@ -3,7 +3,7 @@ from cmu_graphics import *
 ####Picketts charge at gettysburg###
 ###Map
 ###to do: add frendly fire
-###Hejsan svejsan 
+
 
 Rect(0, 0, 400, 400, fill="forestgreen")
 app.steps = 0
