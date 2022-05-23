@@ -33,11 +33,11 @@ for row in range(app.row):
         y =col*60 +22 
         Rect(x,y,400/7,400/7,fill="green", border="black")
         if col == 0:
-            redsold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="DarkBlue", border='black', borderWidth=1))
-            app.grid[row][0] = redsold
+            bluesold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="DarkBlue", border='black', borderWidth=1))
+            app.grid[row][0] = bluesold
         elif col == 5:
-            bluesold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="Red", border='black', borderWidth=1))
-            app.grid[row][5] = bluesold
+            redsold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 345, 50, 15, fill="Red", border='black', borderWidth=1))
+            app.grid[row][5] = redsold
         
         else:
             hej = Rect(x,y,400/7,400/7,fill="yellow", opacity=50)
