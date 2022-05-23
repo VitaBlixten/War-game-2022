@@ -1,3 +1,4 @@
+from re import X
 from cmu_graphics import *
 import math
 ####Picketts charge at gettysburg###
@@ -15,6 +16,7 @@ app.selectedCol = -1
 app.phase = "movement"
 import Trees
 
+###find sold
 def findsold(x, y):
     for row in range(app.row):
         for col in range(app.col):
@@ -31,7 +33,6 @@ for row in range(app.row):
     for col in range(app.col):
         x = row*60 + 22
         y =col*60 +22 
-        Rect(x,y,400/7,400/7,fill="green", border="black")
         if col == 0:
             bluesold = Group(Rect(x,y,400/7,400/7,fill="green", border="black") , Rect(x+3.2 , 45, 50, 15, fill="DarkBlue", border='black', borderWidth=1))
             app.grid[row][0] = bluesold
@@ -50,14 +51,7 @@ for row in range(app.row):
 
 
 ###soldiers
-'''
-for row in range(app.row):
-    x = row*60 + 25.2 
-    redsold = Rect(x, 45, 50, 15, fill="DarkBlue", border='black', borderWidth=1)
-    bluesold = Grupp(Rect(x, 345, 50, 15, fill="Red", border='black', borderWidth=1))
-    app.grid[row][0] = redsold
-    app.grid[row][5] = bluesold
-'''
+
 
 ###firing
 def shooting(sold1, sold2):
@@ -78,38 +72,40 @@ def shooting(sold1, sold2):
 ###Vibility
 
 ###find soldider
-###Movement
 def swap(row1, col1, row2, col2):
     # Swaps the fills of the blocks at (row1, col1) and (row2, col2).
     X2 = app.grid[row2][col2].centerX
     Y2 = app.grid[row2][col2].centerY
+    X1 = app.grid[row1][col1].centerX
+    Y1 = app.grid[row1][col1].centerY
     app.grid[row1][col1].centerX = X2
     app.grid[row1][col1].centerY = Y2
-    app.grid[row1][col1] = app.grid[row2][col2]
-    app.grid[row2][col2] = hej
+    app.grid[row2][col2].centerX = X1
+    app.grid[row2][col2].centerY = Y1
+
 
          
 
 def onMousePress(mouseX, mouseY):
-    if app.phase == "movement":
-        row1 = -1
-        col1 = -1
+    row1 = -1
+    col1 = -1
 
-        # If a block was already clicked, stores its values.
-        if (app.selectedRow != -1):
-            row1 = app.selectedRow
-            col1 = app.selectedCol
-        block = findsold(mouseX, mouseY)
+    # If a block was already clicked, stores its values.
+    if (app.selectedRow != -1):
+        row1 = app.selectedRow
+        col1 = app.selectedCol
+    block = findsold(mouseX, mouseY)
+    block.centerX = X
 
-        # Second time a block was clicked.
-        if ((block != None) and (row1 != -1)):
-            # Swaps the colors.
-            if app.grid[app.selectedRow][app.selectedCol] == hej:
-                swap(row1, col1, app.selectedRow, app.selectedCol)
+    # Second time a block was clicked.
+    if ((block != None) and (row1 != -1) and (abs(block.centerX - X) <= 100)):
+        # Swaps the colors.
+        swap(row1, col1, app.selectedRow, app.selectedCol)
 
-                # Resets the selected row and col and update the correct blocks.
-                app.selectedRow = -1
-                app.selectedCol = -1
+        # Resets the selected row and col and update the correct blocks.
+        app.selectedRow = -1
+        app.selectedCol = -1
+        
 
 def onKeyPress(key):
     if key == 'm':
