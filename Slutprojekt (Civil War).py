@@ -1,6 +1,7 @@
 from re import X
 from cmu_graphics import *
 import math
+from Trees import *
 ####Picketts charge at gettysburg###
 ###Map
 ###to do: add frendly fire
@@ -14,7 +15,7 @@ app.grid = makeList(app.col,app.row)
 app.selectedRow = -1
 app.selectedCol = -1
 app.phase = "movement"
-import Trees
+TreeTop()
 
 ###find sold
 def findsold(x, y):
