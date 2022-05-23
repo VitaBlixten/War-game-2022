@@ -98,6 +98,7 @@ def swap(row1, col1, row2, col2):
          
 
 def onMousePress(mouseX, mouseY):
+<<<<<<< HEAD
     if app.phase == "movement":
         row1 = -1
         col1 = -1
@@ -117,6 +118,28 @@ def onMousePress(mouseX, mouseY):
                 # Resets the selected row and col and update the correct blocks.
                 app.selectedRow = -1
                 app.selectedCol = -1
+=======
+    row1 = -1
+    col1 = -1
+    blockyY = 0
+    # If a block was already clicked, stores its values.
+    if (app.selectedRow != -1):
+        row1 = app.selectedRow
+        col1 = app.selectedCol
+    block = findsold(mouseX, mouseY)
+    blockyY = block.centerY  
+
+    # Second time a block was clicked.
+    if ((block != None) and (row1 != -1) and (abs(block.centerY - blockyY) <= 100)):
+        # Swaps the colors.
+        swap(row1, col1, app.selectedRow, app.selectedCol)
+
+        # Resets the selected row and col and update the correct blocks.
+        app.selectedRow = -1
+        app.selectedCol = -1
+        blockyY = 0
+        
+>>>>>>> b1b30b3e8c59e031d97c9b219634cc723b6cc0f7
 
 def onKeyPress(key):
     if key == 'm':
