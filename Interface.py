@@ -1,9 +1,15 @@
 from cmu_graphics import *
 from sys import exit
 
+app.playing = False
+
 Options = Image('Installningar.png',0,0,height=400,width=400,visible = False)
 back1 = Rect(20,347,85,33,fill=rgb(72,76,67), border='Black',visible = False)
 yes = Label('Back',63,363,size=25,fill=rgb(228,224,210),visible = False)
+
+wip = Label("Work in progress", 200,45,size=40,visible = False)
+back2 = Rect(20,347,85,33,fill=rgb(72,76,67), border='Black',visible = False)
+yes2 = Label('Back',63,363,size=25,fill=rgb(228,224,210),visible = False)
 
 ###Box
 back = Image('Startsida.png',0,0,height=400,width=400)
@@ -25,26 +31,10 @@ plus2,
 plus3, 
 )
 
+multi = Group(
 
-def help():
-    controls = "To move your troops:"
-    controlss = "Click on the troop you want to move"
-    controlsss = "and click on a empty tile" 
-    controls1 = "To attack enemy troops:" 
-    controlss1 = "Click on the troop you want to attack with" 
-    controlssss1 = "and click on an enemy troop with a range" 
-    controlsss1 = "of x to shoot or on a tile besides your troop" 
-    controlsssss1 = " to charge with bayonets."
-    Rect(0,0,400, 400, fill='white')
-    Label("Help", 200,45,size=40)
-    Label(controls, 200,133,size=20)
-    Label(controlss, 200,163,size=20)
-    Label(controlsss, 200,183,size=20)
-    Label(controls1, 200,223,size=20)
-    Label(controlss1, 200,253,size=20)
-    Label(controlsss1, 200,293,size=20)
-    Label(controlssss1, 200, 273,size=20)
-    Label(controlsssss1, 200, 313,size=20)
+)
+
 
 def onMouseMove(mouseX,mouseY):
     if box.contains(mouseX,mouseY):
@@ -66,6 +56,10 @@ def onMouseMove(mouseX,mouseY):
     elif back1.contains(mouseX,mouseY):
         back1.fill = "Lightgrey"
         back1.opacity = 45
+
+    elif back2.contains(mouseX,mouseY):
+        back2.fill = "Lightgrey"
+        back2.opacity = 45
         
     else:
         box.fill = None
@@ -73,32 +67,70 @@ def onMouseMove(mouseX,mouseY):
         plus2.fill = None
         plus3.fill = None
         back1.fill = rgb(72,76,67)
+        back2.fill = rgb(72,76,67)
         back1.opacity = 100
+        back2.opacity = 100
         box.opacity = 100
         plus1.opacity = 100
         plus2.opacity = 100
         plus3.opacity = 100
 
 def onMousePress(mouseX, mouseY):
-    if plus1.contains(mouseX,mouseY):
-        boxes.clear()
-    if box.contains(mouseX,mouseY):
-        boxes.clear()
-        help()
-    if plus3.contains(mouseX,mouseY):
-        Pic.add(
-            Options,
-            back1,
-            yes
-        )
-        Options.visible = True
-        back1.visible = True
-        yes.visible = True
-        Pic.toFront()
+    if(app.playing == False):
+        if plus1.contains(mouseX,mouseY):
+            boxes.clear()
+            Pic.clear()
+            multi.clear()
+            app.playing = True 
+    if(app.playing == False):
+        if box.contains(mouseX,mouseY):
+            Pic.clear()
+            boxes.clear()
+            multi.add(
+                back2,
+                yes2,
+                wip
+            )
+            wip.visible = True
+            back2.visible = True
+            yes2.visible = True
+            app.playing = True
+    if(app.playing == False):
+        if plus3.contains(mouseX,mouseY):
+            Pic.add(
+                Options,
+                back1,
+                yes
+            )
+            Options.visible = True
+            back1.visible = True
+            yes.visible = True
+            Pic.toFront()
+            multi.clear()
+            boxes.clear()
+            app.playing = True
     if back1.contains(mouseX,mouseY):
-        Pic.clear()                
-    if plus2.contains(mouseX,mouseY):
-        exit()
-
+        Pic.clear()
+        boxes.add(
+            back,
+            box, 
+            plus1, 
+            plus2,
+            plus3, 
+        )
+        app.playing = False
+    if(app.playing == False):                
+        if plus2.contains(mouseX,mouseY):
+            exit()
+    if back2.contains(mouseX,mouseY):
+        boxes.add(
+            back,
+            box, 
+            plus1, 
+            plus2,
+            plus3, 
+        )
+        multi.clear()    
+        app.playing = False
 
 cmu_graphics.run()
