@@ -56,7 +56,7 @@ for row in range(app.row):
 
 ###firing
 def shooting(col1, col2, row1, row2):
-    ### Kolla att kraven för att avfyra ett skott uppfylls
+    '''### Kolla att kraven för att avfyra ett skott uppfylls
    
     ### Hitta avståndet mellan skytten och målet
     distance = abs(col1 - col2)
@@ -72,7 +72,8 @@ def shooting(col1, col2, row1, row2):
         damage = randrange(2,10) 
 
 
-    app.grid[row2][col2].value -= damage
+    app.grid[row2][col2].value -= damage'''
+    print('hej')
     pass
 
 
@@ -106,15 +107,17 @@ def onMousePress(mouseX, mouseY):
     blockyY = block.centerY  
 
     # Second time a block was clicked.
-    if ((block != None) and (row1 != -1) and (abs(block.centerY - blockyY) <= 100)):
-        # Swaps the colors.
-        swap(row1, col1, app.selectedRow, app.selectedCol)
+    if app.phase == 'movement':
+        if ((block != None) and (row1 != -1) and (abs(block.centerY - blockyY) <= 100)):
+            # Swaps the colors.
+            swap(row1, col1, app.selectedRow, app.selectedCol)
 
-        # Resets the selected row and col and update the correct blocks.
-        app.selectedRow = -1
-        app.selectedCol = -1
-        blockyY = 0
-        
+            # Resets the selected row and col and update the correct blocks.
+            app.selectedRow = -1
+            app.selectedCol = -1
+            blockyY = 0
+    if app.phase == 'killing':
+        shooting(col1, row1, app.selectedRow, app.selectedCol)
 
 def onKeyPress(key):
     if key == 'm':
