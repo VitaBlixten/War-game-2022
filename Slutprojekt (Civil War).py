@@ -122,6 +122,7 @@ def onKeyPress(key):
         pass
 
     if key == 'k':
+        app.phase = "killing"
         pass
     pass
 
