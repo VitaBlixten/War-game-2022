@@ -82,6 +82,7 @@ def onMousePress(mouseX, mouseY):
             Pic.clear()
             multi.clear()
             app.playing = True 
+    
     if(app.playing == False):
         if box.contains(mouseX,mouseY):
             Pic.clear()
@@ -95,6 +96,7 @@ def onMousePress(mouseX, mouseY):
             back2.visible = True
             yes2.visible = True
             app.playing = True
+    
     if(app.playing == False):
         if plus3.contains(mouseX,mouseY):
             Pic.add(
@@ -109,6 +111,7 @@ def onMousePress(mouseX, mouseY):
             multi.clear()
             boxes.clear()
             app.playing = True
+    
     if back1.contains(mouseX,mouseY):
         Pic.clear()
         boxes.add(
@@ -119,9 +122,11 @@ def onMousePress(mouseX, mouseY):
             plus3, 
         )
         app.playing = False
+    
     if(app.playing == False):                
         if plus2.contains(mouseX,mouseY):
             exit()
+    
     if back2.contains(mouseX,mouseY):
         boxes.add(
             back,
