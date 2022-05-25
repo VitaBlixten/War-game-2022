@@ -1,4 +1,3 @@
-from re import X
 from cmu_graphics import *
 import math
 from Trees import *
