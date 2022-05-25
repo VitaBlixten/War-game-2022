@@ -6,6 +6,8 @@ from Trees import *
 ###Map
 ###to do: add frendly fire
 
+life = 60
+
 Rect(0, 0, 400, 400, fill="forestgreen")
 app.steps = 0
 app.turn = True
@@ -115,7 +117,7 @@ def onMousePress(mouseX, mouseY):
             # Resets the selected row and col and update the correct blocks.
             app.selectedRow = -1
             app.selectedCol = -1
-            blockyY = 0
+            blockyY = 0 
     if app.phase == 'killing':
         shooting(col1, row1, app.selectedRow, app.selectedCol)
 
