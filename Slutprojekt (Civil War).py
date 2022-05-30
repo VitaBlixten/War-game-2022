@@ -117,8 +117,9 @@ def onMousePress(mouseX, mouseY):
             blok2 = app.grid[app.selectedRow][app.selectedCol]
             print(blok1.centerY, blok2.centerY)
         
-            if abs(blok1.centerY - blok2.centerY) <= 100:
+            if (abs(blok1.centerY - blok2.centerY) <= 100) and (abs(blok1.centerX - blok2.centerX) <= 100):
                 print(abs(blok1.centerY - blok2.centerY))
+                print(abs(blok1.centerX - blok2.centerX))
                 swap(row1, col1, app.selectedRow, app.selectedCol)
 
                 # Resets the selected row and col and update the correct blocks.
