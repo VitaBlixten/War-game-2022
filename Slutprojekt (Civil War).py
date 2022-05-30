@@ -99,24 +99,32 @@ def swap(row1, col1, row2, col2):
 def onMousePress(mouseX, mouseY):
     row1 = -1
     col1 = -1
-    blockyY = 0
+    blok1 = 0
+    blok2 = 0
     # If a block was already clicked, stores its values.
     if (app.selectedRow != -1):
         row1 = app.selectedRow
         col1 = app.selectedCol
     block = findsold(mouseX, mouseY)
-    blockyY = block.centerY  
+    
 
     # Second time a block was clicked.
     if app.phase == 'movement':
-        if ((block != None) and (row1 != -1) and (abs(block.centerY - blockyY) <= 100)):
+        if ((block != None) and (row1 != -1) ):
             # Swaps the colors.
-            swap(row1, col1, app.selectedRow, app.selectedCol)
+            #print(blockyY, block.centerY)
+            blok1 = app.grid[row1][col1]
+            blok2 = app.grid[app.selectedRow][app.selectedCol]
+            print(blok1.centerY, blok2.centerY)
+        
+            if abs(blok1.centerY - blok2.centerY) <= 100:
+                print(abs(blok1.centerY - blok2.centerY))
+                swap(row1, col1, app.selectedRow, app.selectedCol)
 
-            # Resets the selected row and col and update the correct blocks.
-            app.selectedRow = -1
-            app.selectedCol = -1
-            blockyY = 0 
+                # Resets the selected row and col and update the correct blocks.
+                app.selectedRow = -1
+                app.selectedCol = -1
+                 
     if app.phase == 'killing':
         if ((block != None) and (row1 != -1) and (abs(block.centerY - blockyY) <= 100)):    
             shooting(col1, row1, app.selectedRow, app.selectedCol)
