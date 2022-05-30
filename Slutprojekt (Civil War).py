@@ -5,7 +5,7 @@ from Trees import *
 ###Map
 ###to do: add frendly fire
 
-life = 60
+app.life = 60
 
 Rect(0, 0, 400, 400, fill="forestgreen")
 app.steps = 0
@@ -57,7 +57,7 @@ for row in range(app.row):
 
 ###firing
 def shooting(col1, col2, row1, row2):
-    '''### Kolla att kraven för att avfyra ett skott uppfylls
+    ### Kolla att kraven för att avfyra ett skott uppfylls
    
     ### Hitta avståndet mellan skytten och målet
     distance = abs(col1 - col2)
@@ -73,8 +73,8 @@ def shooting(col1, col2, row1, row2):
         damage = randrange(2,10) 
 
 
-    app.grid[row2][col2].value -= damage'''
-    print('hej')
+    app.life -= damage
+    print(app.life)    
     pass
 
 
@@ -118,7 +118,8 @@ def onMousePress(mouseX, mouseY):
             app.selectedCol = -1
             blockyY = 0 
     if app.phase == 'killing':
-        shooting(col1, row1, app.selectedRow, app.selectedCol)
+        if ((block != None) and (row1 != -1) and (abs(block.centerY - blockyY) <= 100)):    
+            shooting(col1, row1, app.selectedRow, app.selectedCol)
 
 def onKeyPress(key):
     if key == 'm':
